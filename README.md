@@ -12,7 +12,7 @@ This workshop shows you how to take advantage of the functionality, which is pro
 - [X] Versioning - How is AL-Go for GitHub handling versioning of your apps and your artifacts.
 - [X] Releasing - How to create a release and issue a hotfix.
 - [X] Single-project vs. Multi-project - What is the difference between a single-project and a multi-project repository?
-- [ ] Dependencies #1 - Dependencies to another project in the same repo.
+- [X] Dependencies #1 - Dependencies to another project in the same repo.
 - [ ] Dependencies #2 - Dependencies to AL-Go projects in other repositories (GitHub Packages or appDependencyProbingPaths).
 - [ ] Continuous Delivery - Setup AL-Go for GitHub to deliver your apps whereever you like.
 - [ ] Continuous Deployment - Setup AL-Go for GitHub to deploy your apps to a Business Central environment.
