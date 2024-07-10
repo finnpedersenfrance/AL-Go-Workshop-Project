@@ -12,7 +12,7 @@ defaults:
     shell: powershell
 
 env:
-  workflowDepth: 1
+  workflowDepth: 2
   ALGoOrgSettings: ${{ vars.ALGoOrgSettings }}
   ALGoRepoSettings: ${{ vars.ALGoRepoSettings }}
 
@@ -64,7 +64,7 @@ jobs:
           shell: powershell
           maxBuildDepth: ${{ env.workflowDepth }}
 
-  Build:
+  Build1:
     needs: [ Initialization ]
     if: (!failure()) && (!cancelled()) && fromJson(needs.Initialization.outputs.buildOrderJson)[0].projectsCount > 0
     strategy:
@@ -86,8 +86,30 @@ jobs:
       publishThisBuildArtifacts: ${{ needs.Initialization.outputs.workflowDepth > 1 }}
       artifactsNameSuffix: 'Current'
 
+  Build:
+    needs: [ Initialization, Build1 ]
+    if: (!failure()) && (!cancelled()) && (needs.Build1.result == 'success' || needs.Build1.result == 'skipped') && fromJson(needs.Initialization.outputs.buildOrderJson)[1].projectsCount > 0
+    strategy:
+      matrix:
+        include: ${{ fromJson(needs.Initialization.outputs.buildOrderJson)[1].buildDimensions }}
+      fail-fast: false
+    name: Build ${{ matrix.projectName }} (${{ matrix.buildMode }})
+    uses: ./.github/workflows/_BuildALGoProject.yaml
+    secrets: inherit
+    with:
+      shell: ${{ needs.Initialization.outputs.githubRunnerShell }}
+      runsOn: ${{ needs.Initialization.outputs.githubRunner }}
+      parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
+      project: ${{ matrix.project }}
+      projectName: ${{ matrix.projectName }}
+      buildMode: ${{ matrix.buildMode }}
+      projectDependenciesJson: ${{ needs.Initialization.outputs.projectDependenciesJson }}
+      secrets: 'licenseFileUrl,codeSignCertificateUrl,*codeSignCertificatePassword,keyVaultCertificateUrl,*keyVaultCertificatePassword,keyVaultClientId,gitHubPackagesContext,applicationInsightsConnectionString'
+      publishThisBuildArtifacts: ${{ needs.Initialization.outputs.workflowDepth > 1 }}
+      artifactsNameSuffix: 'Current'
+
   PostProcess:
-    needs: [ Initialization, Build ]
+    needs: [ Initialization, Build1, Build ]
     if: always()
     runs-on: [ windows-latest ]
     steps:
