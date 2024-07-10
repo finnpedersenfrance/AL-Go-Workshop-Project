@@ -10,7 +10,14 @@
   "help": "",
   "url": "",
   "logo": "",
-  "dependencies": [],
+  "dependencies": [
+    {
+      "id": "fcb1295b-6d04-422c-abaf-61fad49616c2",
+      "name": "Licensing",
+      "publisher": "Finn",
+      "version": "1.0.0.0"
+    }
+  ],
   "screenshots": [],
   "platform": "1.0.0.0",
   "application": "22.0.0.0",
