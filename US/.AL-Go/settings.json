@@ -4,5 +4,12 @@
   "testFolders": [],
   "bcptTestFolders": [],
   "artifact": "bcartifacts/sandbox/22.0.54157.55210/us/closest",
+  "appDependencyProbingPaths": [
+    {
+      "repo": ".",
+      "release_status": "include",
+      "projects": "W1"
+    }
+  ],
   "repoVersion": "1.1"
 }
