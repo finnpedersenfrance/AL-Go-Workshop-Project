@@ -20,7 +20,7 @@ This workshop shows you how to take advantage of the functionality, which is pro
 - [ ] Automated Tests - Add automated testing to your project.
 - [ ] Scheduled test runs - Testing your app against the latest (and future Business Central versions) daily or weekly.
 - [ ] Performance Testing - FUTURE TOPIC: Add performance tests to your daily test runs.
-- [ ] Reference Documentation Generation - Keep your reference documentation up-to-date.
+- [X] Reference Documentation Generation - Keep your reference documentation up-to-date.
 - [ ] Delevelopment Environments - FUTURE TOPIC: How to setup a development environment for a project.
 - [ ] The Development Process - FUTURE TOPIC: The recommended way to work with feature branches, pull requests, code reviews and branch protection rules.
 - [ ] Keeping your Repository Up-to-date - FUTURE TOPIC: Updating AL-Go for GitHub to the latest version by running a workflow.
